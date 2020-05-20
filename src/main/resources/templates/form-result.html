@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokeProject</title>
+</head>
+<body>
+    <div class="container">
+        <h1 th:text="'You entered, ' + ${pokemon.name}"></h1>
+        <h3 th:text="'The first type is ' + ${pokemon.type1}"></h3>
+        <h3 th:text="'The second type is ' + ${pokemon.type2}"></h3>
+        <div class="button-container">
+            <a href="/form"><button>Enter Another Pokemon</button></a>
+        </div>
+</body>
+</html>
