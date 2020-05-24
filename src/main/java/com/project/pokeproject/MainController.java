@@ -1,5 +1,7 @@
 package com.project.pokeproject;
 
+import java.util.Random;
+
 import com.project.pokeproject.model.InputPokemon;
 
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,12 @@ public class MainController {
         return "index";
     }
 
+    @PostMapping("/generate")
+    public String generate(@ModelAttribute InputPokemon inputPokemon) {
+        inputPokemon.getRandomPokemon();
+        return "generate";
+    }
+
     @GetMapping("/form")
     public String formInputPokemon(Model model) {
         model.addAttribute("inputPokemon", new InputPokemon());
@@ -35,19 +43,19 @@ public class MainController {
     }
 
     // public static void main(String[] args) {
-    //     Pokemon bulbasaur = Pokemon.fromName("bulbasaur");
-    //     Pokemon ditto = Pokemon.fromName("ditto");
-    //     Pokemon charmander = Pokemon.fromName("charmander");
+    // Pokemon bulbasaur = Pokemon.fromName("bulbasaur");
+    // Pokemon ditto = Pokemon.fromName("ditto");
+    // Pokemon charmander = Pokemon.fromName("charmander");
 
-    //     Pair<PokemonType, PokemonType> type_charmander = charmander.getTypes();
-    //     System.out.println(type_charmander.getFirst());
-    //     System.out.println(type_charmander.getSecond());
+    // Pair<PokemonType, PokemonType> type_charmander = charmander.getTypes();
+    // System.out.println(type_charmander.getFirst());
+    // System.out.println(type_charmander.getSecond());
 
-    //     PokemonAbility ditto_ability = PokemonAbility.fromName("imposter");
-    //     System.out.println(ditto_ability);
+    // PokemonAbility ditto_ability = PokemonAbility.fromName("imposter");
+    // System.out.println(ditto_ability);
 
-    //     Pair<PokemonType, PokemonType> types = bulbasaur.getTypes();
-    //     System.out.println(types.getFirst());
-    //     System.out.println(types.getSecond());
+    // Pair<PokemonType, PokemonType> types = bulbasaur.getTypes();
+    // System.out.println(types.getFirst());
+    // System.out.println(types.getSecond());
     // }
 }

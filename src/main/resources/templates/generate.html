@@ -16,25 +16,27 @@
   </head>
   <body>
     <div class="container">
-      This is Poképroject
+      Your reincarnation name is ...
+      <h1 th:text="${inputPokemon.name}"></h1>
+      <h3 th:text="${inputPokemon.typeToString()} + ' like ' + ${inputPokemon.type1}"></h3>
       <form
-        action="#"
-        th:action="@{/generate}"
-        th:object="${inputPokemon}"
-        method="post"
-      >
-        <div class="button-container">
-          <a href="/generate">
-            <img
-              src="https://pngimg.com/uploads/pokeball/pokeball_PNG24.png"
-              alt="pokeball"
-            />
-            <input type="submit" value="-press button to continue-">
-          </input>
-            </a
-          >
-        </div>
-      </form>
+      action="#"
+      th:action="@{/generate}"
+      th:object="${inputPokemon}"
+      method="post"
+    >
+      <div class="button-container">
+        <a href="/generate">
+          <img
+            src="https://pngimg.com/uploads/pokeball/pokeball_PNG24.png"
+            alt="pokeball"
+          />
+          <input type="submit" value="-generate again-">
+        </input>
+          </a
+        >
+      </div>
+    </form>
     </div>
   </body>
 </html>

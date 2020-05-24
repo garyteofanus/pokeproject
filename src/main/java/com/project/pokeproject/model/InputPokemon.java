@@ -1,11 +1,15 @@
 package com.project.pokeproject.model;
 
+import eu.iamgio.pokedex.exception.PokedexException;
 import eu.iamgio.pokedex.pokemon.Pokemon;
 import eu.iamgio.pokedex.pokemon.PokemonType;
 import eu.iamgio.pokedex.util.Pair;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 public class InputPokemon {
 
@@ -13,6 +17,7 @@ public class InputPokemon {
     private String name;
     private PokemonType type1;
     private PokemonType type2;
+    private static Map<String, String> typeMap = new HashMap<>();
 
     /**
      * @return the name
@@ -60,13 +65,17 @@ public class InputPokemon {
         this.type2 = type2;
     }
 
-
     public static void addPokemon(Pokemon pokemon) {
         listPokemon.add(pokemon);
     }
 
     public Pokemon createPokemon() {
         return Pokemon.fromName(name.toLowerCase());
+        // return Pokemon.fromName(String.valueOf(id));
+    }
+
+    public Pokemon fromId(Number id) throws PokedexException {
+        return Pokemon.fromName(String.valueOf(id));
     }
 
     public void getPokemonType() {
@@ -74,5 +83,37 @@ public class InputPokemon {
         this.type1 = types.getFirst();
         this.type2 = types.getSecond();
     }
-    
+
+    public String typeToString() {
+        return String.format("You are %s", typeMap.get(type1.toString()));
+    }
+
+    public void getRandomPokemon() {
+        Random rand = new Random();
+        Pokemon pokemon = fromId(rand.nextInt(700));
+        this.name = pokemon.getName();
+        Pair<PokemonType, PokemonType> types = pokemon.getTypes();
+        this.type1 = types.getFirst();
+        typeMap.put("GRASS", "Graceful");
+        typeMap.put("FIGHTING", "Baku Hantam");
+        typeMap.put("FLYING", "Cool");
+        typeMap.put("NORMAL", "Normal");
+        typeMap.put("POISON", "Toxic");
+        typeMap.put("GROUND", "Unmovable");
+        typeMap.put("ROCK", "Sturdy");
+        typeMap.put("BUG", "Annoying");
+        typeMap.put("GHOST", "Gone");
+        typeMap.put("STEEL", "Strong");
+        typeMap.put("FIRE", "Fierce");
+        typeMap.put("WATER", "Playful");
+        typeMap.put("ELECTRIC", "Shocking");
+        typeMap.put("PSYCHIC", "Mindblowing");
+        typeMap.put("ICE", "Cold");
+        typeMap.put("DRAGON", "Graceful");
+        typeMap.put("DARK", "Edgy");
+        typeMap.put("FAIRY", "Magestic");
+        typeMap.put("UNKNOWN", "Mysterious");
+        typeMap.put("SHADOW", "Mysterious");
+    }
+
 }
