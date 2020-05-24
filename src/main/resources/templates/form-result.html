@@ -7,9 +7,9 @@
 </head>
 <body>
     <div class="container">
-        <h1 th:text="'You entered, ' + ${pokemon.name}"></h1>
-        <h3 th:text="'The first type is ' + ${pokemon.type1}"></h3>
-        <h3 th:text="'The second type is ' + ${pokemon.type2}"></h3>
+        <h1 th:text="'You entered, ' + ${inputPokemon.name}"></h1>
+        <h3 th:text="'The first type is ' + ${inputPokemon.type1}"></h3>
+        <h3 th:text="'The second type is ' + ${inputPokemon.type2}"></h3>
         <div class="button-container">
             <a href="/form"><button>Enter Another Pokemon</button></a>
         </div>

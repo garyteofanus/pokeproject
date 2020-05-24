@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 // import eu.iamgio.pokedex.pokemon.Pokemon;
 // import eu.iamgio.pokedex.pokemon.PokemonAbility;
@@ -25,12 +24,13 @@ public class MainController {
 
     @GetMapping("/form")
     public String formInputPokemon(Model model) {
-        model.addAttribute("pokemon", new InputPokemon());
+        model.addAttribute("inputPokemon", new InputPokemon());
         return "form";
     }
 
     @PostMapping("/form")
-    public String submitFormInputPokemon(@ModelAttribute InputPokemon pokemon) {
+    public String submitFormInputPokemon(@ModelAttribute InputPokemon inputPokemon) {
+        inputPokemon.getPokemonType();
         return "form-result";
     }
 

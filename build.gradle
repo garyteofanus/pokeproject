@@ -20,7 +20,7 @@ repositories {
 }
 
 dependencies {
-	implementation files('/home/garyteofanus/Downloads/pokedex-java.jar')
+	implementation files('/home/anggit/Downloads/pokedex-java.jar')
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'

@@ -4,7 +4,12 @@ import eu.iamgio.pokedex.pokemon.Pokemon;
 import eu.iamgio.pokedex.pokemon.PokemonType;
 import eu.iamgio.pokedex.util.Pair;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class InputPokemon {
+
+    private static List<Pokemon> listPokemon = new ArrayList<>();
     private String name;
     private PokemonType type1;
     private PokemonType type2;
@@ -14,13 +19,6 @@ public class InputPokemon {
      */
     public String getName() {
         return this.name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
     }
 
     /**
@@ -35,6 +33,36 @@ public class InputPokemon {
      */
     public PokemonType getType2() {
         return this.type2;
+    }
+
+    public static List<Pokemon> getListPokemon() {
+        return listPokemon;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * @param type1 the type to set
+     */
+    public void setType1(PokemonType type1) {
+        this.type1 = type1;
+    }
+
+    /**
+     * @param type2 the type to set
+     */
+    public void setType2(PokemonType type2) {
+        this.type2 = type2;
+    }
+
+
+    public static void addPokemon(Pokemon pokemon) {
+        listPokemon.add(pokemon);
     }
 
     public Pokemon createPokemon() {
