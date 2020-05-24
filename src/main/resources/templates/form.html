@@ -1,22 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>PokeProject</title>
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PokeProject</title>
-</head>
-
-<body>
-    <div class="container">
-        <h1>Enter A Pokemon Name and See Info About It!</h1>
-        <form action="#" th:action="@{/form}" th:object="${pokemon}" method="post">
-            <div class="field">Pokemon Name: <input type="text" th:field="*{name}" /></div>
-            <div class="button-container">
-                <input type="submit" value="Submit" />
-            </div>
-        </form>
-    </div>
-</body>
-
+    <body>
+        <div class="container">
+            <h1>Enter A Pokemon Name and See Info About It!</h1>
+            <form action="#" th:action="@{/form}" th:object="${pokemon}" method="post">
+                <div class="field">Pokemon Name: <input type="text" th:field="*{name}" /></div>
+                <div class="button-container">
+                    <input type="submit" value="Submit" />
+                </div>
+            </form>
+        </div>
+    </body>
 </html>
