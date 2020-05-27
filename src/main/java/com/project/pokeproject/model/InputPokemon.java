@@ -5,11 +5,7 @@ import eu.iamgio.pokedex.pokemon.Pokemon;
 import eu.iamgio.pokedex.pokemon.PokemonType;
 import eu.iamgio.pokedex.util.Pair;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class InputPokemon {
 
@@ -90,10 +86,35 @@ public class InputPokemon {
 
     public void getRandomPokemon() {
         Random rand = new Random();
-        Pokemon pokemon = fromId(rand.nextInt(700));
-        this.name = pokemon.getName();
-        Pair<PokemonType, PokemonType> types = pokemon.getTypes();
-        this.type1 = types.getFirst();
+        String randomName = "";
+        int randNum = ((int)(Math.random() * 3) + 1);
+        for (int i = 0; i <= randNum; i++) {
+//            Pokemon randomPoke = Pokemon.fromId((int)(Math.random() * 808) + 1);
+            Pokemon randomPoke = Pokemon.fromId(rand.nextInt(808));
+            String[] splitName = randomPoke.getName().split("(?<=[aiueo])");
+            // Check randomized splitted pokemon names on terminal
+            System.out.println(Arrays.toString(splitName));
+            if (i == 0) {
+                randomName += splitName[0];
+                // Type is based on first randomized pokemon
+                Pair<PokemonType, PokemonType> types = randomPoke.getTypes();
+                this.type1 = types.getFirst();
+            } else if (i == randNum) {
+                randomName += splitName[splitName.length - 1];
+            } else {
+                randomName += splitName[(int)(Math.random() * splitName.length)];
+            }
+        }
+        // Capitalize first letter
+        randomName = randomName.substring(0, 1).toUpperCase() + randomName.substring(1);
+        // Check pokemon name on terminal
+        System.out.println(randomName);
+        this.name = randomName;
+//        Random rand = new Random();
+//        Pokemon pokemon = fromId(rand.nextInt(700));
+//        this.name = pokemon.getName();
+//        Pair<PokemonType, PokemonType> types = pokemon.getTypes();
+//        this.type1 = types.getFirst();
         typeMap.put("GRASS", "Graceful");
         typeMap.put("FIGHTING", "Baku Hantam");
         typeMap.put("FLYING", "Cool");
