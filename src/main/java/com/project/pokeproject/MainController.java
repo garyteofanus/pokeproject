@@ -22,8 +22,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class MainController {
     private static PokemonAttribute attributeGlobal = new PokemonAttribute();
-    // TODO: Ini possible bug di private method ini, karena declare di controllernya,
-    // Gue ga tau gimana caranya, tapi buat attribute ini tuh constantly bisa di update,
+
+    // TODO: Ini possible bug di private method ini, karena declare di
+    // controllernya,
+    // Gue ga tau gimana caranya, tapi buat attribute ini tuh constantly bisa di
+    // update,
     // Di dalem attribute model di Spring Bootnya.
     @GetMapping("/")
     public String index(Model model) {
@@ -40,11 +43,13 @@ public class MainController {
     public String formQuestionnaire(Model model) {
         // TODO:
         // Stuck di sini, kalo mau bantu:
-        // Refactor buat modelattribute ini biar gimana caranya ga di call terlalu banyak,
+        // Refactor buat modelattribute ini biar gimana caranya ga di call terlalu
+        // banyak,
         // Ataupun buat di form-success sama form ini kalo bisa dijadiin satu juga oke,
-        attributeGlobal.initializePokemonAttribute(); // Contoh: Ini kalo bisa diinitialize sekali jg gpp, ini cuman initialize buat pertanyaannya
-        String question = attributeGlobal.getRandomQuestion(); 
-        List<String> answersList = attributeGlobal.getAnswerListByQuestion(question); 
+        attributeGlobal.initializePokemonAttribute(); // Contoh: Ini kalo bisa diinitialize sekali jg gpp, ini cuman
+                                                      // initialize buat pertanyaannya
+        String question = attributeGlobal.getRandomQuestion();
+        List<String> answersList = attributeGlobal.getAnswerListByQuestion(question);
         model.addAttribute("questionnaire", new Questionnaire());
         model.addAttribute("question", question);
         model.addAttribute("answers", answersList);
@@ -53,13 +58,15 @@ public class MainController {
     }
 
     @PostMapping("/form-success")
-    public String resultFormQuestionnaire(Model model, @ModelAttribute Questionnaire questionnaire){
+    public String resultFormQuestionnaire(Model model, @ModelAttribute Questionnaire questionnaire) {
         // TODO:
         // Stuck di sini, kalo mau bantu:
         // Cari cara buat data-data dari get bisa ditampiliki di sini,
         // Variabel "questions" dibutuhin buat di PokemonAttribute,
         // Buat ngequery attribute yang bakal di increment yang mana.
-        // Abis itu, di query panggil method parseInformation yg udah gue bikin di PokemonAttribute
+        // Abis itu, di query panggil method parseInformation yg udah gue bikin di
+        // PokemonAttribute
+        attributeGlobal.parseInformation();
         model.addAttribute("answer", questionnaire.getAnswer());
         model.addAttribute("attributes", attributeGlobal);
         return "form-result";
