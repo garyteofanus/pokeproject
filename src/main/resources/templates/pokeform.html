@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PokeProject</title>
+    <link rel="stylesheet" th:href="@{style.css}" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <nav>
+      <a class="stonks" href="./">Home</a>
+    </nav>
+    <div class="table-container">
+      <h1 class="stonks">Answer the questions!</h1>
+      <form
+        th:action="@{/pokeform-result}"
+        th:object="${questionInput}"
+        method="post"
+      >
+        <ol>
+          <li th:each="question : ${questions}">
+            <h3 th:text="${question}" />
+            <div th:each="option : ${question.options}" class="radio-item">
+              <div
+                th:each="op : ${option.entrySet().toArray()}"
+                class="radio-item"
+              >
+                <input
+                  type="checkbox"
+                  th:value="${op.getValue()}"
+                  name="${question.name}"
+                  th:field="*{answers}"
+                />
+                <label th:text="${op.getKey()}"></label>
+              </div>
+              <!-- <input type="checkbox" th:value="2" th:field="*{score}" /> -->
+            </div>
+          </li>
+        </ol>
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+  </body>
+</html>

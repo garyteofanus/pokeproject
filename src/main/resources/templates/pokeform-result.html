@@ -19,27 +19,9 @@
       <a class="stonks" href="./">Home</a>
     </nav>
     <div class="container">
-      Your reincarnation name is ...
-      <h1 th:text="${inputPokemon.name}"></h1>
-      <h3 th:text="${inputPokemon.typeToString()} + ' like ' + ${inputPokemon.type1}"></h3>
-      <form
-      action="#"
-      th:action="@{/generate}"
-      th:object="${inputPokemon}"
-      method="post"
-    >
-      <div class="button-container">
-        <a href="/generate">
-          <img
-            src="https://pngimg.com/uploads/pokeball/pokeball_PNG24.png"
-            alt="pokeball"
-          />
-          <input type="submit" value="-generate again-">
-        </input>
-          </a
-        >
-      </div>
-    </form>
+      <h1>Your score is</h1>
+      <h1 class="stonks" th:text="${score}" />
+      <h4><a href="/pokeform">Answer more questions</a></h4>
     </div>
   </body>
 </html>

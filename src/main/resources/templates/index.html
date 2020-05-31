@@ -15,8 +15,23 @@
     />
   </head>
   <body>
+    <nav>
+      <a class="stonks" href="./">Home</a>
+    </nav>
     <div class="container">
       This is Poképroject
+        <div class="button-container">
+          <a href="/pokeform">
+            <img
+              src="https://pngimg.com/uploads/pokeball/pokeball_PNG24.png"
+              alt="pokeball"
+            />
+            <input type="submit" value="Take a personality test">
+          </input>
+            </a
+          >
+        </div>
+        or
       <form
         action="#"
         th:action="@{/generate}"
@@ -29,12 +44,20 @@
               src="https://pngimg.com/uploads/pokeball/pokeball_PNG24.png"
               alt="pokeball"
             />
-            <input type="submit" value="-press button to continue-">
+            <input type="submit" value="Generate Random Pokemon">
           </input>
             </a
           >
         </div>
       </form>
+      <div class="table-container" style="margin-top:40px">
+        <ul class="stonks">
+          <li>Antonius Anggito</li>
+          <li>Jonathan Nicholas</li>
+          <li>Mario Serano</li>
+          <li>Teofanus Gary</li>
+        </ul>
+      </div>
     </div>
   </body>
 </html>
