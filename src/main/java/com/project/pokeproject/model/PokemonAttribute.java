@@ -67,18 +67,16 @@ public class PokemonAttribute {
     }
 
     public void parseInformation() {
-        // String attribute;
-        // int increment;
-        // Map<String, Integer> attributeIncrementer =
-        // getAttributeIncrementByAnswer(getAnswerMapByQuestion(question),
-        // answer);
-        // attribute = (new ArrayList<String>(attributeIncrementer.keySet())).get(0);
-        // increment = attributeIncrementer.get(attribute);
+        // List<String> answers = new ArrayList<>();
+        // for (Questionnaire q : questionnaires) {
+        // answers.add(q.getAnswer());
+        // }
+        // System.out.println(answers);
         for (Map.Entry<String, Map<String, Map<String, Integer>>> entry : questionsMap.entrySet()) {
-            // System.out.println(entry.getKey() + "/" + entry.getValue());
             for (Map.Entry<String, Map<String, Integer>> entry2 : entry.getValue().entrySet()) {
+                System.out.println(entry2.getKey() + " " + entry2.getValue());
+                // List<String> answersList = attributeGlobal.getAnswerListByQuestion(question);
                 for (Map.Entry<String, Integer> entry3 : entry2.getValue().entrySet()) {
-                    // System.out.println(entry3.getKey() + " " + entry3.getValue());
                     String attribute = entry3.getKey();
                     int increment = entry3.getValue();
                     if (attribute.equalsIgnoreCase("shadow")) {
