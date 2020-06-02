@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class MainController {
+
     private static Map<String, Question> questionRepo = new HashMap<>();
     static {
         Question food = new Question();
@@ -114,17 +115,32 @@ public class MainController {
         vacation.setOptions(Arrays.asList(map1, map2, map3));
     }
 
+    /**
+     *
+     * @return
+     */
     @RequestMapping(value = "/questions")
     public ResponseEntity<Object> getquestion() {
         return new ResponseEntity<>(questionRepo.values(), HttpStatus.OK);
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/questions/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> delete(@PathVariable("id") String id) {
         questionRepo.remove(id);
         return new ResponseEntity<>("Question is deleted successsfully", HttpStatus.OK);
     }
 
+    /**
+     *
+     * @param id
+     * @param question
+     * @return
+     */
     @RequestMapping(value = "/questions/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Object> updateProduct(@PathVariable("id") String id, @RequestBody Question question) {
         questionRepo.remove(id);
@@ -133,23 +149,43 @@ public class MainController {
         return new ResponseEntity<>("Question is updated successsfully", HttpStatus.OK);
     }
 
+    /**
+     *
+     * @param question
+     * @return
+     */
     @RequestMapping(value = "/questions", method = RequestMethod.POST)
     public ResponseEntity<Object> createProduct(@RequestBody Question question) {
         questionRepo.put(question.getId(), question);
         return new ResponseEntity<>("Question is created successfully", HttpStatus.CREATED);
     }
 
+    /**
+     *
+     * @param model
+     * @return
+     */
     @GetMapping("/")
     public String index(Model model) {
         return "index";
     }
 
+    /**
+     *
+     * @param inputPokemon
+     * @return
+     */
     @PostMapping("/generate")
     public String generate(@ModelAttribute InputPokemon inputPokemon) {
         inputPokemon.getRandomPokemon();
         return "generate";
     }
 
+    /**
+     *
+     * @param model
+     * @return
+     */
     @GetMapping("/pokeform")
     public String formQuestionnaire(Model model) {
         model.addAttribute("questionInput", new QuestionInput());
@@ -157,6 +193,12 @@ public class MainController {
         return "pokeform";
     }
 
+    /**
+     * 
+     * @param model
+     * @param questionInput
+     * @return
+     */
     @PostMapping("/pokeform-result")
     public String formResult(Model model, QuestionInput questionInput) {
         // model.addAttribute("questionInput", questionInput);

@@ -16,74 +16,109 @@ public class InputPokemon {
     private static Map<String, String> typeMap = new HashMap<>();
 
     /**
-     * @return the name
+     * Getter method for name variable.
+     * @return String name of InputPokemon
      */
     public String getName() {
         return this.name;
     }
 
     /**
-     * @return the type1
+     * Getter method for type1 variable.
+     * @return PokemonType type1
      */
     public PokemonType getType1() {
         return this.type1;
     }
 
     /**
-     * @return the type2
+     * Getter method for type2 variable.
+     * @return PokemonType type2
      */
     public PokemonType getType2() {
         return this.type2;
     }
 
+    /**
+     * Getter method for listPokemon variable.
+     * @return ArrayList of Pokemon variable
+     */
     public static List<Pokemon> getListPokemon() {
         return listPokemon;
     }
 
     /**
-     * @param name the name to set
+     * Setter method for name variable.
+     * @param name String name to set
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * @param type1 the type to set
+     * Setter method for type1 variable.
+     * @param type1 PokemonType type1 to set
      */
     public void setType1(PokemonType type1) {
         this.type1 = type1;
     }
 
     /**
-     * @param type2 the type to set
+     * Setter method for type2 variable.
+     * @param type2 PokemonType type2 to set
      */
     public void setType2(PokemonType type2) {
         this.type2 = type2;
     }
 
+    /**
+     * Add pokemon object to listPokemon.
+     * @param pokemon Pokemon object to add
+     */
     public static void addPokemon(Pokemon pokemon) {
         listPokemon.add(pokemon);
     }
 
+    /**
+     * Create Pokemon based on name.
+     * @return Pokemon object created
+     */
     public Pokemon createPokemon() {
         return Pokemon.fromName(name.toLowerCase());
         // return Pokemon.fromName(String.valueOf(id));
     }
 
+    /**
+     * Create Pokemon based on id.
+     * @param id Number id of pokemon to create
+     * @return Pokemon object created
+     * @throws PokedexException Exception if pokemon id doesn't exist
+     */
     public Pokemon fromId(Number id) throws PokedexException {
         return Pokemon.fromName(String.valueOf(id));
     }
 
+    /**
+     * Get and set type1 and type2 from created pokemon.
+     */
     public void getPokemonType() {
         Pair<PokemonType, PokemonType> types = createPokemon().getTypes();
         this.type1 = types.getFirst();
         this.type2 = types.getSecond();
     }
 
+    /**
+     * String representation of type.
+     * @return String representation about type
+     */
     public String typeToString() {
         return String.format("You are %s", typeMap.get(type1.toString()));
     }
 
+    /**
+     * Method to generate randomized pokemon name
+     * and set typeMap list.
+     */
     public void getRandomPokemon() {
         Random rand = new Random();
         String randomName = "";
@@ -105,16 +140,11 @@ public class InputPokemon {
                 randomName += splitName[(int)(Math.random() * splitName.length)];
             }
         }
-        // Capitalize first letter
         randomName = randomName.substring(0, 1).toUpperCase() + randomName.substring(1);
         // Check pokemon name on terminal
         System.out.println(randomName);
         this.name = randomName;
-//        Random rand = new Random();
-//        Pokemon pokemon = fromId(rand.nextInt(700));
-//        this.name = pokemon.getName();
-//        Pair<PokemonType, PokemonType> types = pokemon.getTypes();
-//        this.type1 = types.getFirst();
+
         typeMap.put("GRASS", "Graceful");
         typeMap.put("FIGHTING", "Baku Hantam");
         typeMap.put("FLYING", "Cool");
