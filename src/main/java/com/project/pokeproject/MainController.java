@@ -25,94 +25,173 @@ public class MainController {
     private static Map<String, Question> questionRepo = new HashMap<>();
     static {
         Question food = new Question();
+        List<Map<String, Integer>> answer = new ArrayList<>();
         food.setId("1");
-        food.setName("Favorite food");
+        food.setName("What food would you prefer out of these three?");
         Map<String, Integer> map1 = new HashMap<String, Integer>() {
             {
-                put("Pizza", 200);
+                put("Pinapple on Pizza", -2);
             }
         };
         Map<String, Integer> map2 = new HashMap<String, Integer>() {
             {
-                put("Burger", 150);
+                put("Sirloin Steak", 2);
             }
         };
         Map<String, Integer> map3 = new HashMap<String, Integer>() {
             {
-                put("Steak Isabella", 50);
+                put("Padang Rice", 0);
             }
         };
-        food.setOptions(Arrays.asList(map1, map2, map3));
+        answer = Arrays.asList(map1, map2, map3);
+        Collections.shuffle(answer);
+        food.setOptions(answer);
         questionRepo.put(food.getId(), food);
 
         Question hobby = new Question();
         hobby.setId("2");
-        hobby.setName("What do you prefer playing");
+        hobby.setName("Which of these activity do you prefer?");
         questionRepo.put(hobby.getId(), hobby);
         map1 = new HashMap<String, Integer>() {
             {
-                put("Leetcode", 200);
+                put("Sleeping", -4);
             }
         };
         map2 = new HashMap<String, Integer>() {
             {
-                put("Nintendo Switch", 150);
+                put("Traveling", 3);
             }
         };
         map3 = new HashMap<String, Integer>() {
             {
-                put("LoGiSiM", -250);
+                put("Studying", 1);
             }
         };
-        hobby.setOptions(Arrays.asList(map1, map2, map3));
+        answer = Arrays.asList(map1, map2, map3);
+        Collections.shuffle(answer);
+        hobby.setOptions(answer);
 
-        Question pets = new Question();
-        pets.setId("3");
-        pets.setName("What is your preferred pet");
-        questionRepo.put(pets.getId(), pets);
+        Question subject = new Question();
+        subject.setId("3");
+        subject.setName("What is your favorite subject?");
+        questionRepo.put(subject.getId(), subject);
         map1 = new HashMap<String, Integer>() {
             {
-                put("Turtle", 200);
+                put("PSD", -2);
             }
         };
         map2 = new HashMap<String, Integer>() {
             {
-                put("Rock", 250);
+                put("Mathematics/Science", 3);
             }
         };
         map3 = new HashMap<String, Integer>() {
             {
-                put("Cat", 250);
+                put("Physical Education", 0);
             }
         };
-        pets.setOptions(Arrays.asList(map1, map2, map3));
+        answer = Arrays.asList(map1, map2, map3);
+        Collections.shuffle(answer);
+        subject.setOptions(answer);
 
-        Question style = new Question();
-        style.setId("4");
-        style.setName("What do you prefer playing");
-        questionRepo.put(style.getId(), style);
-        style.setOptions(Arrays.asList(map1, map2, map3));
+        Question genre = new Question();
+        genre.setId("4");
+        genre.setName("What is favorite music genre?");
+        questionRepo.put(genre.getId(), genre);
+        map1 = new HashMap<String, Integer>(){
+            {
+                put("Anime Song", -2);
+            }
+        };
+        map2 = new HashMap<String, Integer>(){
+            {
+                put("Chillhop", 3);
+            }
+        };
+        map3 = new HashMap<String, Integer>(){
+            {
+                put("Pop", 0);
+            }
+        };
+        answer = Arrays.asList(map1, map2, map3);
+        Collections.shuffle(answer);
+        genre.setOptions(answer);
 
-        Question vacation = new Question();
-        vacation.setId("5");
-        vacation.setName("What is your preferred vacation");
-        questionRepo.put(vacation.getId(), vacation);
+        Question color = new Question();
+        color.setId("5");
+        color.setName("What is your favorite color?");
+        questionRepo.put(color.getId(), color);
         map1 = new HashMap<String, Integer>() {
             {
-                put("LoGiSiM", -200);
+                put("Blue", -2);
             }
         };
         map2 = new HashMap<String, Integer>() {
             {
-                put("Sleep", 100);
+                put("Red", 3);
             }
         };
         map3 = new HashMap<String, Integer>() {
             {
-                put("Semester Pendek", 350);
+                put("Black", 1);
             }
         };
-        vacation.setOptions(Arrays.asList(map1, map2, map3));
+        answer = Arrays.asList(map1, map2, map3);
+        Collections.shuffle(answer);
+        color.setOptions(answer);
+
+        Question sleep = new Question();
+        sleep.setId("6");
+        sleep.setName("At what time do you go to bed?");
+        questionRepo.put(sleep.getId(), sleep);
+
+        map1 = new HashMap<String, Integer>(){
+            {
+                put("After 12AM", -5);
+            }
+        };
+
+        map2 = new HashMap<String, Integer>(){
+            {
+                put("10pm - 12pm", 3);
+            }
+        };
+
+        map3 = new HashMap<String, Integer>(){
+            {
+                put("8pm - 10pm", 1);
+            }
+        };
+        answer = Arrays.asList(map1, map2, map3);
+        Collections.shuffle(answer);
+        sleep.setOptions(answer);
+
+
+        Question game = new Question();
+        game.setId("7");
+        game.setName("At what time do you go to bed?");
+        questionRepo.put(game.getId(), game);
+
+        map1 = new HashMap<String, Integer>(){
+            {
+                put("After 12AM", -5);
+            }
+        };
+
+        map2 = new HashMap<String, Integer>(){
+            {
+                put("10pm - 12pm", 3);
+            }
+        };
+
+        map3 = new HashMap<String, Integer>(){
+            {
+                put("8pm - 10pm", 1);
+            }
+        };
+        answer = Arrays.asList(map1, map2, map3);
+        Collections.shuffle(answer);
+        game.setOptions(answer);
     }
 
     /**
@@ -188,8 +267,17 @@ public class MainController {
      */
     @GetMapping("/pokeform")
     public String formQuestionnaire(Model model) {
+        // List<Question> questionRepo = questionRepo.values();
+        List<Question> al = new ArrayList<Question>(questionRepo.values());
+        Collections.shuffle(al);
+        for(Question thing : al){
+            List<Map<String,Integer>> newThing = thing.getOptions();
+            Collections.shuffle(newThing);
+            thing.setOptions(newThing);
+        }
+        al = al.subList(0, 5);
         model.addAttribute("questionInput", new QuestionInput());
-        model.addAttribute("questions", questionRepo.values());
+        model.addAttribute("questions", al);
         return "pokeform";
     }
 
@@ -202,6 +290,10 @@ public class MainController {
     @PostMapping("/pokeform-result")
     public String formResult(Model model, QuestionInput questionInput) {
         // model.addAttribute("questionInput", questionInput);
+        // TODO: if range segini, dia itu Dark
+        // if range segini, dia itu Normal
+        // if range segini, dia itu Fire,
+        // Get Pokemon sesuai tipe dia, terus randomize, sama informasi-informasi pokemonnya di bawa ke HTML-nya.
         int score = 0;
         for (int i : questionInput.getAnswers()) {
             score += i;
