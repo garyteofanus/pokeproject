@@ -1,10 +1,10 @@
 # Fullstack Pokemon Generator using Sringboot and Thymeleaf
 
+<img src="./static/demo0.png" width="450px"/>
+<img src="./static/demo1.png" width="450px"/>
+<img src="./static/demo2.png" width="450px"/>
+<img src="./static/demo3.png" width="450px"/>
 ![cool squirtle](https://images-ext-1.discordapp.net/external/VRp_nRYeDVeWrvZJK7ySxIOhK6FAtwfWKmrOFB3Fees/https/imgur.com/OM52HE1.gif)
-<img src="./static/demo0.png" width="500px"/>
-<img src="./static/demo1.png" width="500px"/>
-<img src="./static/demo2.png" width="500px"/>
-<img src="./static/demo3.png" width="500px"/>
 
 ## Backend Endpoints!
 
