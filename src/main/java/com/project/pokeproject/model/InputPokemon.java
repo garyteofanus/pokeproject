@@ -116,8 +116,10 @@ public class InputPokemon {
     }
 
     /**
-     * Method to generate randomized pokemon name
-     * and set typeMap list.
+     * Get random number with given range.
+     * @param min int minimum value
+     * @param max int maximum value
+     * @return int number randomized
      */
     private static int getRandomNumberInRange(int min, int max){
         if (min >= max){
@@ -127,11 +129,19 @@ public class InputPokemon {
         Random r = new Random();
         return r.nextInt((max - min) + 1) + min;
     }
-    public static Pokemon getRandomPokemon(){
-        Pokemon returnedPokemon = Pokemon.fromId(getRandomNumberInRange(1, 808));
-        return returnedPokemon;
+
+    /**
+     * Create and get randomized pokemon with given type.
+     * @param type String type to choose
+     * @return Pokemon object created
+     */
+    public static Pokemon getRandomPokemon(String type){
+        Pokemon retPokemon = Pokemon.fromId(getRandomNumberInRange(1, 808));
+        while (retPokemon.getTypes().getFirst().toString().equalsIgnoreCase(type) == false) {
+            retPokemon = Pokemon.fromId(getRandomNumberInRange(1, 808));
+        }
+        return retPokemon;
     }
-    
     
     // public static void main(String[] args){
     //     System.out.println(getRandomPokemonBasedonType("electric"));

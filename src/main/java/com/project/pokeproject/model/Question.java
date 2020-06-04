@@ -83,6 +83,6 @@ public class Question {
      * @return String representation of Question class
      */
     public String toString() {
-        return String.format("%s?", name);
+        return String.format("%s", name);
     }
 }

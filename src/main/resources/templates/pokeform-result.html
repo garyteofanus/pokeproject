@@ -20,8 +20,11 @@
     </nav>
     <div class="container">
       <h1>Your pokemon is</h1>
-      <h1 class="stonks" th:text="${pokemon.getName()}" />
-      <h4><a href="/pokeform">Answer more questions</a></h4>
+      <h3 class="stonks" th:text="${name}" />
+      <img th:src="${sprite}" style="display: inline-block;"/>
+      <h6 th:text="${desc}"></h6>
+      <br>
+      <h4><a href="/pokeform">Answer questions again</a></h4>
     </div>
   </body>
 </html>
