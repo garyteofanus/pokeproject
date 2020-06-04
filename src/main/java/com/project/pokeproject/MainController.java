@@ -2,6 +2,11 @@ package com.project.pokeproject;
 
 import java.util.*;
 
+import eu.iamgio.pokedex.exception.PokedexException;
+import eu.iamgio.pokedex.pokemon.Pokemon;
+import eu.iamgio.pokedex.pokemon.PokemonType;
+import eu.iamgio.pokedex.util.Pair;
+
 import com.project.pokeproject.model.InputPokemon;
 import com.project.pokeproject.model.PokemonAttribute;
 import com.project.pokeproject.model.Question;
@@ -295,10 +300,27 @@ public class MainController {
         // if range segini, dia itu Fire,
         // Get Pokemon sesuai tipe dia, terus randomize, sama informasi-informasi pokemonnya di bawa ke HTML-nya.
         int score = 0;
+        Pokemon newPoke = InputPokemon.getRandomPokemon(); 
         for (int i : questionInput.getAnswers()) {
             score += i;
         }
+        if (score >= -2 && score <= 2){
+            while(newPoke.getTypes().getFirst().toString().equalsIgnoreCase("normal") == false){
+                newPoke = InputPokemon.getRandomPokemon();
+            }
+        } else if(score > 2){
+            while(newPoke.getTypes().getFirst().toString().equalsIgnoreCase("fire") == false){
+                newPoke = InputPokemon.getRandomPokemon();
+            }
+        } else if(score < -2){
+            while(newPoke.getTypes().getFirst().toString().equalsIgnoreCase("dark") == false){
+                newPoke = InputPokemon.getRandomPokemon();
+            }
+            newPoke = InputPokemon.getRandomPokemon();
+        }
+        System.out.println(newPoke.getName());
         model.addAttribute("score", score);
+        model.addAttribute("pokemon", newPoke);
         return "pokeform-result";
     }
 
