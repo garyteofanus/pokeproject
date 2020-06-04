@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class MainController {
 
     private static Map<String, Question> questionRepo = new HashMap<>();
+    private final String PREFIX = "https://projectpokemon.org/images/normal-sprite/";
 
     static {
 
@@ -316,26 +317,32 @@ public class MainController {
         for (int i : questionInput.getAnswers()) {
             score += i;
         }
-        System.out.println(score);
+
+        String type = "";
         if (score >= -2 && score <= 2) {
             newPoke = InputPokemon.getRandomPokemon("normal");
             adj = normalAdj[(int) (Math.random() * 6) + 0];
             desc = descList[0];
+            type = "normal";
         } else if (score > 2) {
             newPoke = InputPokemon.getRandomPokemon("fire");
             adj = fireAdj[(int) (Math.random() * 6) + 0];
             desc = descList[1];
+            type = "fire";
         } else if (score < -2) {
             newPoke = InputPokemon.getRandomPokemon("dark");
             adj = darkAdj[(int) (Math.random() * 6) + 0];
             desc = descList[2];
+            type = "dark";
         }
+
+        model.addAttribute("type", type);
         model.addAttribute("score", score);
         model.addAttribute("pokemon", newPoke);
         model.addAttribute("name",
                 "The " + adj + " " + newPoke.getName().substring(0, 1).toUpperCase() + newPoke.getName().substring(1));
         model.addAttribute("desc", desc);
-        model.addAttribute("sprite", newPoke.getSprites()[0].getUrl());
+        model.addAttribute("sprite", PREFIX + newPoke.getName() + ".gif");
         return "pokeform-result";
     }
 }

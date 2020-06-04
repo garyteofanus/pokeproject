@@ -18,10 +18,10 @@
     <nav>
       <a class="stonks" href="./">Home</a>
     </nav>
-    <div class="container">
+    <div th:class="'container ' + ${type}">
       <h1>Your pokemon is</h1>
       <h3 class="stonks" th:text="${name}" />
-      <img th:src="${sprite}" style="display: inline-block;"/>
+      <img class="transparent" th:src="${sprite}" />
       <h6 th:text="${desc}"></h6>
       <br>
       <h4><a href="/pokeform">Answer questions again</a></h4>
