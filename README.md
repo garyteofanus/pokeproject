@@ -1,4 +1,4 @@
-# Fullstack Pokemon Generator using Sringboot and Thymeleaf
+# Fullstack Pokemon Generator using Springboot and Thymeleaf
 
 <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: center;">
 <img src="./static/demo0.png" width="425px"/>
