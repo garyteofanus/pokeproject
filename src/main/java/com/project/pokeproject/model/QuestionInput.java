@@ -1,8 +1,5 @@
 package com.project.pokeproject.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class QuestionInput {
     private Integer[] answers;
     private int score;
@@ -39,9 +36,3 @@ public class QuestionInput {
         // Empty constructor
     }
 }
-
-// class TestLombok {
-//     {
-//         QuestionInput q = new QuestionInput();
-//     }
-// }

@@ -12,8 +12,9 @@ public class Question {
 
     /**
      * Constructor for Question class.
-     * @param id String number of question id
-     * @param name String name representation of question
+     * 
+     * @param id      String number of question id
+     * @param name    String name representation of question
      * @param options ArrayList of options to choose
      */
     public Question(String id, String name, List<Map<String, Integer>> options) {
@@ -32,6 +33,7 @@ public class Question {
 
     /**
      * Getter for id variable.
+     * 
      * @return id String number of id variable
      */
     public String getId() {
@@ -40,6 +42,7 @@ public class Question {
 
     /**
      * Getter for name variable.
+     * 
      * @return name String representation of question name
      */
     public String getName() {
@@ -48,6 +51,7 @@ public class Question {
 
     /**
      * Getter for options variable.
+     * 
      * @return options ArrayList representation of options available
      */
     public List<Map<String, Integer>> getOptions() {
@@ -56,6 +60,7 @@ public class Question {
 
     /**
      * Setter for id variable.
+     * 
      * @param id String number of question id
      */
     public void setId(String id) {
@@ -64,6 +69,7 @@ public class Question {
 
     /**
      * Setter for name variable.
+     * 
      * @param name String representation of question name
      */
     public void setName(String name) {
@@ -72,6 +78,7 @@ public class Question {
 
     /**
      * Setter for options variable.
+     * 
      * @param options ArrayList representation of options available
      */
     public void setOptions(List<Map<String, Integer>> options) {
@@ -80,6 +87,7 @@ public class Question {
 
     /**
      * To string method for Question class.
+     * 
      * @return String representation of Question class
      */
     public String toString() {

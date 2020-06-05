@@ -2,13 +2,9 @@ package com.project.pokeproject;
 
 import java.util.*;
 
-import eu.iamgio.pokedex.exception.PokedexException;
 import eu.iamgio.pokedex.pokemon.Pokemon;
-import eu.iamgio.pokedex.pokemon.PokemonType;
-import eu.iamgio.pokedex.util.Pair;
 
 import com.project.pokeproject.model.InputPokemon;
-import com.project.pokeproject.model.PokemonAttribute;
 import com.project.pokeproject.model.Question;
 import com.project.pokeproject.model.QuestionInput;
 import org.springframework.http.HttpStatus;
@@ -30,8 +26,9 @@ public class MainController {
     private final String PREFIX = "https://projectpokemon.org/images/normal-sprite/";
 
     static {
+        // Create questions and save them in spring boot backend
+        // as a restful API
 
-        // Question 1, favorite food
         Question food = new Question();
         List<Map<String, Integer>> answer = new ArrayList<>();
         food.setId("1");
@@ -203,8 +200,9 @@ public class MainController {
     }
 
     /**
+     * returns JSON object of all questions
      *
-     * @return
+     * @return ResponseEntity
      */
     @GetMapping(value = "/questions")
     public ResponseEntity<Object> getquestion() {
@@ -212,9 +210,10 @@ public class MainController {
     }
 
     /**
+     * returns response of deleted question
      *
      * @param id
-     * @return
+     * @return ResponseEntity
      */
     @DeleteMapping(value = "/questions/{id}")
     public ResponseEntity<Object> delete(@PathVariable("id") String id) {
@@ -223,10 +222,11 @@ public class MainController {
     }
 
     /**
-     *
+     * put endpoint for question with specified id
+     * 
      * @param id
      * @param question
-     * @return
+     * @return ResponseEntity
      */
     @PutMapping(value = "/questions/{id}")
     public ResponseEntity<Object> updateProduct(@PathVariable("id") String id, @RequestBody Question question) {
@@ -237,9 +237,10 @@ public class MainController {
     }
 
     /**
+     * post endpoint for creating new question
      *
      * @param question
-     * @return
+     * @return ResponseEntity
      */
     @PostMapping(value = "/questions")
     public ResponseEntity<Object> createProduct(@RequestBody Question question) {
@@ -248,9 +249,10 @@ public class MainController {
     }
 
     /**
+     * index page
      *
      * @param model
-     * @return
+     * @return html
      */
     @GetMapping("/")
     public String index(Model model) {
@@ -258,9 +260,10 @@ public class MainController {
     }
 
     /**
+     * generate random pokemon page
      *
      * @param inputPokemon
-     * @return
+     * @return html
      */
     @PostMapping("/generate")
     public String generate(@ModelAttribute InputPokemon inputPokemon) {
@@ -269,13 +272,13 @@ public class MainController {
     }
 
     /**
+     * return list of questions from backend
      *
      * @param model
-     * @return
+     * @return html
      */
     @GetMapping("/pokeform")
     public String formQuestionnaire(Model model) {
-        // List<Question> questionRepo = questionRepo.values();
         List<Question> al = new ArrayList<Question>(questionRepo.values());
         Collections.shuffle(al);
         for (Question thing : al) {
@@ -290,18 +293,14 @@ public class MainController {
     }
 
     /**
+     * displays pokemon result from pokeform answer and score
      *
      * @param model
      * @param questionInput
-     * @return
+     * @return html
      */
     @PostMapping("/pokeform-result")
     public String formResult(Model model, QuestionInput questionInput) {
-        // model.addAttribute("questionInput", questionInput);
-        // TODO: if range score segini, pokemonnya tipe Dark, Normal, atau Fire
-        // TODO: rapihin html/css dan deskripsi tiap tipe
-        // Get Pokemon sesuai tipe dia, terus randomize, sama informasi-informasi
-        // pokemonnya di bawa ke HTML-nya.
         int score = 0;
         Pokemon newPoke = null;
         String adj = "";

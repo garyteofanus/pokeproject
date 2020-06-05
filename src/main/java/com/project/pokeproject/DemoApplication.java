@@ -8,6 +8,7 @@ public class DemoApplication {
 
 	/**
 	 * Main entry method of the application.
+	 *
 	 * @param args String array of given arguments.
 	 */
 	public static void main(String[] args) {

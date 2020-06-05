@@ -1,11 +1,16 @@
 package com.project.pokeproject.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
 import eu.iamgio.pokedex.exception.PokedexException;
 import eu.iamgio.pokedex.pokemon.Pokemon;
 import eu.iamgio.pokedex.pokemon.PokemonType;
 import eu.iamgio.pokedex.util.Pair;
-
-import java.util.*;
 
 public class InputPokemon {
 
@@ -17,6 +22,7 @@ public class InputPokemon {
 
     /**
      * Getter method for name variable.
+     *
      * @return String name of InputPokemon
      */
     public String getName() {
@@ -25,6 +31,7 @@ public class InputPokemon {
 
     /**
      * Getter method for type1 variable.
+     *
      * @return PokemonType type1
      */
     public PokemonType getType1() {
@@ -33,6 +40,7 @@ public class InputPokemon {
 
     /**
      * Getter method for type2 variable.
+     *
      * @return PokemonType type2
      */
     public PokemonType getType2() {
@@ -41,6 +49,7 @@ public class InputPokemon {
 
     /**
      * Getter method for listPokemon variable.
+     *
      * @return ArrayList of Pokemon variable
      */
     public static List<Pokemon> getListPokemon() {
@@ -49,6 +58,7 @@ public class InputPokemon {
 
     /**
      * Setter method for name variable.
+     *
      * @param name String name to set
      */
     public void setName(String name) {
@@ -57,6 +67,7 @@ public class InputPokemon {
 
     /**
      * Setter method for type1 variable.
+     *
      * @param type1 PokemonType type1 to set
      */
     public void setType1(PokemonType type1) {
@@ -65,6 +76,7 @@ public class InputPokemon {
 
     /**
      * Setter method for type2 variable.
+     *
      * @param type2 PokemonType type2 to set
      */
     public void setType2(PokemonType type2) {
@@ -73,6 +85,7 @@ public class InputPokemon {
 
     /**
      * Add pokemon object to listPokemon.
+     *
      * @param pokemon Pokemon object to add
      */
     public static void addPokemon(Pokemon pokemon) {
@@ -81,6 +94,7 @@ public class InputPokemon {
 
     /**
      * Create Pokemon based on name.
+     *
      * @return Pokemon object created
      */
     public Pokemon createPokemon() {
@@ -90,6 +104,7 @@ public class InputPokemon {
 
     /**
      * Create Pokemon based on id.
+     *
      * @param id Number id of pokemon to create
      * @return Pokemon object created
      * @throws PokedexException Exception if pokemon id doesn't exist
@@ -109,6 +124,7 @@ public class InputPokemon {
 
     /**
      * String representation of type.
+     *
      * @return String representation about type
      */
     public String typeToString() {
@@ -117,12 +133,13 @@ public class InputPokemon {
 
     /**
      * Get random number with given range.
+     *
      * @param min int minimum value
      * @param max int maximum value
      * @return int number randomized
      */
-    private static int getRandomNumberInRange(int min, int max){
-        if (min >= max){
+    private static int getRandomNumberInRange(int min, int max) {
+        if (min >= max) {
             throw new IllegalArgumentException("max must be greater than min");
         }
 
@@ -132,10 +149,11 @@ public class InputPokemon {
 
     /**
      * Create and get randomized pokemon with given type.
+     *
      * @param type String type to choose
      * @return Pokemon object created
      */
-    public static Pokemon getRandomPokemon(String type){
+    public static Pokemon getRandomPokemon(String type) {
         Pokemon retPokemon = Pokemon.fromId(getRandomNumberInRange(1, 808));
         while (retPokemon.getTypes().getFirst().toString().equalsIgnoreCase(type) == false) {
             retPokemon = Pokemon.fromId(getRandomNumberInRange(1, 808));
