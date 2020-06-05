@@ -2,6 +2,7 @@
   --purple: #7b7bf4;
   --red: #ec5272;
   --purple-dark: rgb(105, 105, 245);
+  --green: rgb(99, 211, 183);
 }
 *,
 *:before,
@@ -42,7 +43,7 @@ h1 {
 }
 .stonks {
   font-family: "Press Start 2P", cursive;
-  color: rgb(99, 211, 183);
+  color: var(--green);
 }
 
 a:hover {
@@ -116,10 +117,7 @@ input {
   font-size: 1.2rem;
   font-family: "Press Start 2P", cursive;
 }
-/* .button-container:hover {
-  color: white;
-  background: var(--red);
-} */
+
 input:hover {
   color: white;
   background: var(--red);
@@ -173,13 +171,13 @@ td {
 }
 
 .container.fire h3 {
-color: var(--red);
+  color: var(--red);
 }
 .container.dark h3 {
-color: var(--purple-dark);
+  color: var(--purple-dark);
 }
 .container.dark a {
-color: var(--green);
+  color: var(--green);
 }
 
 .transparent {

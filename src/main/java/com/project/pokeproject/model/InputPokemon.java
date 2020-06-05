@@ -173,7 +173,6 @@ public class InputPokemon {
             Pokemon randomPoke = Pokemon.fromId(rand.nextInt(808));
             String[] splitName = randomPoke.getName().split("(?<=[aiueo])");
             // Check randomized splitted pokemon names on terminal
-            System.out.println(Arrays.toString(splitName));
             if (i == 0) {
                 randomName += splitName[0];
                 // Type is based on first randomized pokemon
@@ -186,7 +185,6 @@ public class InputPokemon {
         }
         this.name = randomName.substring(0, 1).toUpperCase() + randomName.substring(1);
         // Check pokemon name on terminal
-        System.out.println(randomName);
 
         typeMap.put("GRASS", "Graceful");
         typeMap.put("FIGHTING", "Baku Hantam");
