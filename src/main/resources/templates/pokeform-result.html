@@ -20,7 +20,9 @@
     </nav>
     <div th:class="'container ' + ${type}">
       <h1>Your pokemon is</h1>
+      <br>
       <h3 class="stonks" th:text="${name}" />
+      <br>
       <img class="transparent" th:src="${sprite}" />
       <h6 th:text="${desc}"></h6>
       <br>

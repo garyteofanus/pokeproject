@@ -142,9 +142,54 @@ public class InputPokemon {
         }
         return retPokemon;
     }
-    
-    // public static void main(String[] args){
-    //     System.out.println(getRandomPokemonBasedonType("electric"));
-    // }
+
+    /**
+     * Method to generate randomized pokemon name and set typeMap list.
+     */
+    public void getRandomPokemon() {
+        Random rand = new Random();
+        String randomName = "";
+        int randNum = ((int) (Math.random() * 3) + 1);
+        for (int i = 0; i <= randNum; i++) {
+            // Pokemon randomPoke = Pokemon.fromId((int)(Math.random() * 808) + 1);
+            Pokemon randomPoke = Pokemon.fromId(rand.nextInt(808));
+            String[] splitName = randomPoke.getName().split("(?<=[aiueo])");
+            // Check randomized splitted pokemon names on terminal
+            System.out.println(Arrays.toString(splitName));
+            if (i == 0) {
+                randomName += splitName[0];
+                // Type is based on first randomized pokemon
+                this.type1 = randomPoke.getTypes().getFirst();
+            } else if (i == randNum) {
+                randomName += splitName[splitName.length - 1];
+            } else {
+                randomName += splitName[(int) (Math.random() * splitName.length)];
+            }
+        }
+        this.name = randomName.substring(0, 1).toUpperCase() + randomName.substring(1);
+        // Check pokemon name on terminal
+        System.out.println(randomName);
+
+        typeMap.put("GRASS", "Graceful");
+        typeMap.put("FIGHTING", "Baku Hantam");
+        typeMap.put("FLYING", "Cool");
+        typeMap.put("NORMAL", "Normal");
+        typeMap.put("POISON", "Toxic");
+        typeMap.put("GROUND", "Unmovable");
+        typeMap.put("ROCK", "Sturdy");
+        typeMap.put("BUG", "Annoying");
+        typeMap.put("GHOST", "Gone");
+        typeMap.put("STEEL", "Strong");
+        typeMap.put("FIRE", "Fierce");
+        typeMap.put("WATER", "Playful");
+        typeMap.put("ELECTRIC", "Shocking");
+        typeMap.put("PSYCHIC", "Mindblowing");
+        typeMap.put("ICE", "Cold");
+        typeMap.put("DRAGON", "Graceful");
+        typeMap.put("DARK", "Edgy");
+        typeMap.put("FAIRY", "Magestic");
+        typeMap.put("UNKNOWN", "Mysterious");
+        typeMap.put("SHADOW", "Mysterious");
+    }
 
 }

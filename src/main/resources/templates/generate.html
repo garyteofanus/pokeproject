@@ -20,8 +20,11 @@
     </nav>
     <div class="container">
       Your reincarnation name is ...
+      <br> <br>
       <h1 th:text="${inputPokemon.name}"></h1>
+      <br>
       <h3 th:text="${inputPokemon.typeToString()} + ' like ' + ${inputPokemon.type1}"></h3>
+      <br>
       <form
       action="#"
       th:action="@{/generate}"

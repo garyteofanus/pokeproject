@@ -264,7 +264,7 @@ public class MainController {
      */
     @PostMapping("/generate")
     public String generate(@ModelAttribute InputPokemon inputPokemon) {
-        // inputPokemon.getRandomPokemon();
+        inputPokemon.getRandomPokemon();
         return "generate";
     }
 

@@ -183,8 +183,14 @@ color: var(--green);
 }
 
 .transparent {
-z-index: -1;
-position: absolute;
-opacity: 0.3;
-width: 100vw;
+  z-index: -1;
+  position: absolute;
+  opacity: 0.3;
+  width: 75vw;
+  height: 75vh;
+  padding-bottom: 13vh;
+}
+
+.container h1 {
+  font-size: larger;
 }
