@@ -171,3 +171,26 @@ td {
   text-align: center;
   min-width: 100px;
 }
+
+.container.fire h3 {
+color: var(--red);
+}
+.container.dark h3 {
+color: var(--purple-dark);
+}
+.container.dark a {
+color: var(--green);
+}
+
+.transparent {
+  z-index: -1;
+  position: absolute;
+  opacity: 0.3;
+  width: 75vw;
+  height: 75vh;
+  padding-bottom: 13vh;
+}
+
+.container h1 {
+  font-size: larger;
+}

@@ -18,10 +18,15 @@
     <nav>
       <a class="stonks" href="./">Home</a>
     </nav>
-    <div class="container">
-      <h1>Your score is</h1>
-      <h1 class="stonks" th:text="${score}" />
-      <h4><a href="/pokeform">Answer more questions</a></h4>
+    <div th:class="'container ' + ${type}">
+      <h1>Your pokemon is</h1>
+      <br>
+      <h3 class="stonks" th:text="${name}" />
+      <br>
+      <img class="transparent" th:src="${sprite}" />
+      <h6 th:text="${desc}"></h6>
+      <br>
+      <h4><a href="/pokeform">Answer questions again</a></h4>
     </div>
   </body>
 </html>

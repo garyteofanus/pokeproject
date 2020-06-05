@@ -2,6 +2,11 @@ package com.project.pokeproject;
 
 import java.util.*;
 
+import eu.iamgio.pokedex.exception.PokedexException;
+import eu.iamgio.pokedex.pokemon.Pokemon;
+import eu.iamgio.pokedex.pokemon.PokemonType;
+import eu.iamgio.pokedex.util.Pair;
+
 import com.project.pokeproject.model.InputPokemon;
 import com.project.pokeproject.model.PokemonAttribute;
 import com.project.pokeproject.model.Question;
@@ -22,126 +27,179 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class MainController {
 
     private static Map<String, Question> questionRepo = new HashMap<>();
+    private final String PREFIX = "https://projectpokemon.org/images/normal-sprite/";
+
     static {
 
         // Question 1, favorite food
         Question food = new Question();
+        List<Map<String, Integer>> answer = new ArrayList<>();
         food.setId("1");
-        food.setName("Favorite food");
-
-        Map<String, Integer> map1 = new HashMap<>();
-        map1.put("Pizza", 200); 
-
-        Map<String, Integer> map2 = new HashMap<>();
-        map2.put("Burger", 150);
-
-        Map<String, Integer> map3 = new HashMap<>();
-        map3.put("Steak Isabella", 50);
-
-        food.setOptions(Arrays.asList(map1, map2, map3));
+        food.setName("What food would you prefer out of these three?");
+        Map<String, Integer> map1 = new HashMap<String, Integer>() {
+            {
+                put("Fried Chicken", -2);
+            }
+        };
+        Map<String, Integer> map2 = new HashMap<String, Integer>() {
+            {
+                put("Ice cream", 2);
+            }
+        };
+        Map<String, Integer> map3 = new HashMap<String, Integer>() {
+            {
+                put("Padang Rice", 0);
+            }
+        };
+        answer = Arrays.asList(map1, map2, map3);
+        Collections.shuffle(answer);
+        food.setOptions(answer);
         questionRepo.put(food.getId(), food);
 
         // Question 2, favorite game
         Question hobby = new Question();
         hobby.setId("2");
-        hobby.setName("What do you prefer playing");
+        hobby.setName("Which of these activity do you prefer?");
         questionRepo.put(hobby.getId(), hobby);
+        map1 = new HashMap<String, Integer>() {
+            {
+                put("Sleeping", -5);
+            }
+        };
+        map2 = new HashMap<String, Integer>() {
+            {
+                put("Traveling", 5);
+            }
+        };
+        map3 = new HashMap<String, Integer>() {
+            {
+                put("Studying", 0);
+            }
+        };
+        answer = Arrays.asList(map1, map2, map3);
+        Collections.shuffle(answer);
+        hobby.setOptions(answer);
 
-        map1 = new HashMap<>();
-        map1.put("Leetcode", 200);
+        Question subject = new Question();
+        subject.setId("3");
+        subject.setName("What is your favorite subject?");
+        questionRepo.put(subject.getId(), subject);
+        map1 = new HashMap<String, Integer>() {
+            {
+                put("Art", -3);
+            }
+        };
+        map2 = new HashMap<String, Integer>() {
+            {
+                put("Science", 0);
+            }
+        };
+        map3 = new HashMap<String, Integer>() {
+            {
+                put("Sports", 3);
+            }
+        };
+        answer = Arrays.asList(map1, map2, map3);
+        Collections.shuffle(answer);
+        subject.setOptions(answer);
 
-        map2 = new HashMap<>();
-        map2.put("Nintendo Switch", 150);
+        Question genre = new Question();
+        genre.setId("4");
+        genre.setName("What is favorite music genre?");
+        questionRepo.put(genre.getId(), genre);
+        map1 = new HashMap<String, Integer>() {
+            {
+                put("Anime Song", 0);
+            }
+        };
+        map2 = new HashMap<String, Integer>() {
+            {
+                put("Chillhop", -2);
+            }
+        };
+        map3 = new HashMap<String, Integer>() {
+            {
+                put("Pop", 2);
+            }
+        };
+        answer = Arrays.asList(map1, map2, map3);
+        Collections.shuffle(answer);
+        genre.setOptions(answer);
 
-        map3 = new HashMap<>();
-        map3.put("LoGiSiM", -250);
+        Question color = new Question();
+        color.setId("5");
+        color.setName("What is your favorite color?");
+        questionRepo.put(color.getId(), color);
+        map1 = new HashMap<String, Integer>() {
+            {
+                put("Blue", -2);
+            }
+        };
+        map2 = new HashMap<String, Integer>() {
+            {
+                put("Red", 3);
+            }
+        };
+        map3 = new HashMap<String, Integer>() {
+            {
+                put("Black", 0);
+            }
+        };
+        answer = Arrays.asList(map1, map2, map3);
+        Collections.shuffle(answer);
+        color.setOptions(answer);
 
-        hobby.setOptions(Arrays.asList(map1, map2, map3));
+        Question sleep = new Question();
+        sleep.setId("6");
+        sleep.setName("At what time do you go to bed?");
+        questionRepo.put(sleep.getId(), sleep);
 
-        // Question 3, favorite pet
-        Question pets = new Question();
-        pets.setId("3");
-        pets.setName("What is your preferred pet");
-        questionRepo.put(pets.getId(), pets);
+        map1 = new HashMap<String, Integer>() {
+            {
+                put("After 12AM", -4);
+            }
+        };
 
-        map1 = new HashMap<>();
-        map1.put("Turtle", 200);
+        map2 = new HashMap<String, Integer>() {
+            {
+                put("10pm - 12pm", 0);
+            }
+        };
 
-        map2 = new HashMap<>();
-        map2.put("Rock", 250);
+        map3 = new HashMap<String, Integer>() {
+            {
+                put("8pm - 10pm", 2);
+            }
+        };
+        answer = Arrays.asList(map1, map2, map3);
+        Collections.shuffle(answer);
+        sleep.setOptions(answer);
 
-        map3 = new HashMap<>();
-        map3.put("Cat", 250);
+        Question movie = new Question();
+        movie.setId("7");
+        movie.setName("What is your favorite movie genre?");
+        questionRepo.put(movie.getId(), movie);
 
-        pets.setOptions(Arrays.asList(map1, map2, map3));
+        map1 = new HashMap<String, Integer>() {
+            {
+                put("Horror", 0);
+            }
+        };
 
-        // Question 4, favorite study place
-        Question study = new Question();
-        study.setId("4");
-        study.setName("Where are your favorite study place");
-        questionRepo.put(study.getId(), study);
+        map2 = new HashMap<String, Integer>() {
+            {
+                put("Romance", 1);
+            }
+        };
 
-        map1 = new HashMap<>();
-        map1.put("Pucil Atas", 250);
-
-        map2 = new HashMap<>();
-        map2.put("Pucil Bawah", 250);
-
-        map3 = new HashMap<>();
-        map3.put("Perpusat", 100);
-
-        study.setOptions(Arrays.asList(map1, map2, map3));
-
-        // Question 5, favorite vacation 
-        Question vacation = new Question();
-        vacation.setId("5");
-        vacation.setName("What is your preferred vacation");
-        questionRepo.put(vacation.getId(), vacation);
-
-        map1 = new HashMap<>();
-        map1.put("Zimbabwe", -200);
-
-        map2 = new HashMap<>();
-        map2.put("Sleep", 100);
-
-        map3 = new HashMap<>();
-        map3.put("Semester Pendek", 350);
-
-        vacation.setOptions(Arrays.asList(map1, map2, map3));
-
-        // Question 6, favorite snack
-        Question snack = new Question();
-        snack.setId("6");
-        snack.setName("What is your favorite snack");
-        questionRepo.put(snack.getId(), snack);
-
-        map1 = new HashMap<>();
-        map1.put("French Fires", 120);
-
-        map2 = new HashMap<>();
-        map2.put("Chocolate Chip Cookies", 97);
-
-        map3 = new HashMap<>();
-        map3.put("Candy", 113);
-
-        snack.setOptions(Arrays.asList(map1, map2, map3));
-
-        // Question 7, hated person
-        Question person = new Question();
-        person.setId("7");
-        person.setName("Who do you hate the most");
-        questionRepo.put(person.getId(), person);
-
-        map1 = new HashMap<>();
-        map1.put("You", -100);
-
-        map2 = new HashMap<>();
-        map2.put("Yourself", -100);
-
-        map3 = new HashMap<>();
-        map3.put("The One Who's Playing", -100);
-
-        person.setOptions(Arrays.asList(map1, map2, map3));
+        map3 = new HashMap<String, Integer>() {
+            {
+                put("Action", 3);
+            }
+        };
+        answer = Arrays.asList(map1, map2, map3);
+        Collections.shuffle(answer);
+        movie.setOptions(answer);
     }
 
     /**
@@ -217,13 +275,22 @@ public class MainController {
      */
     @GetMapping("/pokeform")
     public String formQuestionnaire(Model model) {
+        // List<Question> questionRepo = questionRepo.values();
+        List<Question> al = new ArrayList<Question>(questionRepo.values());
+        Collections.shuffle(al);
+        for (Question thing : al) {
+            List<Map<String, Integer>> newThing = thing.getOptions();
+            Collections.shuffle(newThing);
+            thing.setOptions(newThing);
+        }
+        al = al.subList(0, 7);
         model.addAttribute("questionInput", new QuestionInput());
-        model.addAttribute("questions", questionRepo.values());
+        model.addAttribute("questions", al);
         return "pokeform";
     }
 
     /**
-     * 
+     *
      * @param model
      * @param questionInput
      * @return
@@ -231,35 +298,51 @@ public class MainController {
     @PostMapping("/pokeform-result")
     public String formResult(Model model, QuestionInput questionInput) {
         // model.addAttribute("questionInput", questionInput);
+        // TODO: if range score segini, pokemonnya tipe Dark, Normal, atau Fire
+        // TODO: rapihin html/css dan deskripsi tiap tipe
+        // Get Pokemon sesuai tipe dia, terus randomize, sama informasi-informasi
+        // pokemonnya di bawa ke HTML-nya.
         int score = 0;
+        Pokemon newPoke = null;
+        String adj = "";
+        String desc = "";
+        String[] descList = new String[3];
+        descList[0] = "You got a normal type pokemon! It seems like you are a chill person and prefer not to get too much attention.";
+        descList[1] = "You got a fire type pokemon! Your aura blazes among others, you have the spirit to experience various things you really want.";
+        descList[2] = "You got a dark type pokemon! You like spending time on your own, sometimes there is too much thing going on outside.";
+        String[] normalAdj = { "Ordinary", "Common", "Traditional", "Simple", "Natural", "Trivial" };
+        String[] fireAdj = { "Fiery", "Blazing", "Spirited", "Dynamic", "Vibrant", "Enthusiastic" };
+        String[] darkAdj = { "Shy", "Reserved", "Modest", "Quiet", "Relaxed", "Calm" };
+
         for (int i : questionInput.getAnswers()) {
             score += i;
         }
+
+        String type = "";
+        if (score >= -2 && score <= 2) {
+            newPoke = InputPokemon.getRandomPokemon("normal");
+            adj = normalAdj[(int) (Math.random() * 6) + 0];
+            desc = descList[0];
+            type = "normal";
+        } else if (score > 2) {
+            newPoke = InputPokemon.getRandomPokemon("fire");
+            adj = fireAdj[(int) (Math.random() * 6) + 0];
+            desc = descList[1];
+            type = "fire";
+        } else if (score < -2) {
+            newPoke = InputPokemon.getRandomPokemon("dark");
+            adj = darkAdj[(int) (Math.random() * 6) + 0];
+            desc = descList[2];
+            type = "dark";
+        }
+
+        model.addAttribute("type", type);
         model.addAttribute("score", score);
+        model.addAttribute("pokemon", newPoke);
+        model.addAttribute("name",
+                "The " + adj + " " + newPoke.getName().substring(0, 1).toUpperCase() + newPoke.getName().substring(1));
+        model.addAttribute("desc", desc);
+        model.addAttribute("sprite", PREFIX + newPoke.getName() + ".gif");
         return "pokeform-result";
     }
-
-    // @GetMapping("/form")
-    // public String formQuestionnaire(Model model) {
-    // attributeGlobal.initializePokemonAttribute(); // Contoh: Ini kalo bisa
-    // diinitialize sekali jg gpp, ini cuman
-    // // initialize buat pertanyaannya
-    // String question = attributeGlobal.getRandomQuestion();
-    // List<String> answersList = attributeGlobal.getAnswerListByQuestion(question);
-    // model.addAttribute("questionnaire", new Questionnaire());
-    // model.addAttribute("question", question);
-    // model.addAttribute("answers", answersList);
-    // model.addAttribute("attributes", attributeGlobal);
-    // return "form";
-    // }
-
-    // @PostMapping("/form-success")
-    // public String resultFormQuestionnaire(Model model, @ModelAttribute
-    // Questionnaire questionnaire) {
-
-    // attributeGlobal.parseInformation();
-    // model.addAttribute("answer", questionnaire.getAnswer());
-    // model.addAttribute("attributes", attributeGlobal);
-    // return "form-result";
-    // }
 }

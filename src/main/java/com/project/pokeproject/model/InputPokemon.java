@@ -4,13 +4,9 @@ import eu.iamgio.pokedex.exception.PokedexException;
 import eu.iamgio.pokedex.pokemon.Pokemon;
 import eu.iamgio.pokedex.pokemon.PokemonType;
 import eu.iamgio.pokedex.util.Pair;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.*;
 
-@Getter
-@Setter
 public class InputPokemon {
 
     private static List<Pokemon> listPokemon = new ArrayList<>();
@@ -19,61 +15,61 @@ public class InputPokemon {
     private PokemonType type2;
     private static Map<String, String> typeMap = new HashMap<>();
 
-    // /**
-    //  * Getter method for name variable.
-    //  * @return String name of InputPokemon
-    //  */
-    // public String getName() {
-    //     return this.name;
-    // }
+    /**
+     * Getter method for name variable.
+     * @return String name of InputPokemon
+     */
+    public String getName() {
+        return this.name;
+    }
 
-    // /**
-    //  * Getter method for type1 variable.
-    //  * @return PokemonType type1
-    //  */
-    // public PokemonType getType1() {
-    //     return this.type1;
-    // }
+    /**
+     * Getter method for type1 variable.
+     * @return PokemonType type1
+     */
+    public PokemonType getType1() {
+        return this.type1;
+    }
 
-    // /**
-    //  * Getter method for type2 variable.
-    //  * @return PokemonType type2
-    //  */
-    // public PokemonType getType2() {
-    //     return this.type2;
-    // }
+    /**
+     * Getter method for type2 variable.
+     * @return PokemonType type2
+     */
+    public PokemonType getType2() {
+        return this.type2;
+    }
 
-    // /**
-    //  * Getter method for listPokemon variable.
-    //  * @return ArrayList of Pokemon variable
-    //  */
-    // public static List<Pokemon> getListPokemon() {
-    //     return listPokemon;
-    // }
+    /**
+     * Getter method for listPokemon variable.
+     * @return ArrayList of Pokemon variable
+     */
+    public static List<Pokemon> getListPokemon() {
+        return listPokemon;
+    }
 
-    // /**
-    //  * Setter method for name variable.
-    //  * @param name String name to set
-    //  */
-    // public void setName(String name) {
-    //     this.name = name;
-    // }
+    /**
+     * Setter method for name variable.
+     * @param name String name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    // /**
-    //  * Setter method for type1 variable.
-    //  * @param type1 PokemonType type1 to set
-    //  */
-    // public void setType1(PokemonType type1) {
-    //     this.type1 = type1;
-    // }
+    /**
+     * Setter method for type1 variable.
+     * @param type1 PokemonType type1 to set
+     */
+    public void setType1(PokemonType type1) {
+        this.type1 = type1;
+    }
 
-    // /**
-    //  * Setter method for type2 variable.
-    //  * @param type2 PokemonType type2 to set
-    //  */
-    // public void setType2(PokemonType type2) {
-    //     this.type2 = type2;
-    // }
+    /**
+     * Setter method for type2 variable.
+     * @param type2 PokemonType type2 to set
+     */
+    public void setType2(PokemonType type2) {
+        this.type2 = type2;
+    }
 
     /**
      * Add pokemon object to listPokemon.
@@ -120,15 +116,42 @@ public class InputPokemon {
     }
 
     /**
-     * Method to generate randomized pokemon name
-     * and set typeMap list.
+     * Get random number with given range.
+     * @param min int minimum value
+     * @param max int maximum value
+     * @return int number randomized
+     */
+    private static int getRandomNumberInRange(int min, int max){
+        if (min >= max){
+            throw new IllegalArgumentException("max must be greater than min");
+        }
+
+        Random r = new Random();
+        return r.nextInt((max - min) + 1) + min;
+    }
+
+    /**
+     * Create and get randomized pokemon with given type.
+     * @param type String type to choose
+     * @return Pokemon object created
+     */
+    public static Pokemon getRandomPokemon(String type){
+        Pokemon retPokemon = Pokemon.fromId(getRandomNumberInRange(1, 808));
+        while (retPokemon.getTypes().getFirst().toString().equalsIgnoreCase(type) == false) {
+            retPokemon = Pokemon.fromId(getRandomNumberInRange(1, 808));
+        }
+        return retPokemon;
+    }
+
+    /**
+     * Method to generate randomized pokemon name and set typeMap list.
      */
     public void getRandomPokemon() {
         Random rand = new Random();
         String randomName = "";
-        int randNum = ((int)(Math.random() * 3) + 1);
+        int randNum = ((int) (Math.random() * 3) + 1);
         for (int i = 0; i <= randNum; i++) {
-//            Pokemon randomPoke = Pokemon.fromId((int)(Math.random() * 808) + 1);
+            // Pokemon randomPoke = Pokemon.fromId((int)(Math.random() * 808) + 1);
             Pokemon randomPoke = Pokemon.fromId(rand.nextInt(808));
             String[] splitName = randomPoke.getName().split("(?<=[aiueo])");
             // Check randomized splitted pokemon names on terminal
@@ -140,7 +163,7 @@ public class InputPokemon {
             } else if (i == randNum) {
                 randomName += splitName[splitName.length - 1];
             } else {
-                randomName += splitName[(int)(Math.random() * splitName.length)];
+                randomName += splitName[(int) (Math.random() * splitName.length)];
             }
         }
         this.name = randomName.substring(0, 1).toUpperCase() + randomName.substring(1);
