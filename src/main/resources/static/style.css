@@ -101,10 +101,16 @@ nav {
   font-size: 2rem;
   border-radius: 2px;
 }
+.button-container img {
+  width: 50px;
+  position: absolute;
+  left: 34vw;
+}
+
 .button-container a img {
   width: 50px;
   position: absolute;
-  transform: translate(-60%, -45%);
+  left: 34vw;
 }
 input {
   padding: 0.5vw 0.6vw;
